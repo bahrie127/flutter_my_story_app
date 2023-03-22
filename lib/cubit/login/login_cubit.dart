@@ -20,13 +20,11 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginLoading());
     final result = await authService.login(data);
     result.fold(
-      (l) => LoginError(message: l.message),
+      (l) => emit(LoginError(message: l.message)),
       (r) async {
         await authPreference.saveAuthData(r.loginResult);
         emit(LoginLoaded(loginResult: r.loginResult));
       },
     );
   }
-
-  
 }

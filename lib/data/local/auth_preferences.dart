@@ -7,9 +7,9 @@ import '../models/login_response_model.dart';
 class AuthPreference {
   final Future<SharedPreferences> _prefs;
 
-  AuthPreference({
-    required Future<SharedPreferences> prefs,
-  }) : _prefs = prefs;
+  AuthPreference(
+    Future<SharedPreferences> prefs,
+  ) : _prefs = prefs;
 
   static const _key = "KEY";
 
