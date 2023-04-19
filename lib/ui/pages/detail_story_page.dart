@@ -1,16 +1,18 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_my_story_app/cubit/detail_story/detail_story_cubit.dart';
 
 import '../../data/models/list_story_response_model.dart';
 
 class DetailStoryPage extends StatefulWidget {
+  static const routeName = '/detail';
   const DetailStoryPage({
     Key? key,
-    required this.story,
+    required this.storyId,
   }) : super(key: key);
-  final Story story;
+  final String storyId;
 
   @override
   State<DetailStoryPage> createState() => _DetailPageState();
@@ -19,7 +21,7 @@ class DetailStoryPage extends StatefulWidget {
 class _DetailPageState extends State<DetailStoryPage> {
   @override
   void initState() {
-    context.read<DetailStoryCubit>().getStoryDetail(widget.story.id!);
+    context.read<DetailStoryCubit>().getStoryDetail(widget.storyId);
 
     super.initState();
   }

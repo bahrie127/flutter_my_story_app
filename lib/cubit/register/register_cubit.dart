@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_my_story_app/data/models/register_request_model.dart';
 
 import 'package:flutter_my_story_app/data/remote/auth_service.dart';

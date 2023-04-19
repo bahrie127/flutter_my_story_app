@@ -1,5 +1,5 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_my_story_app/data/models/list_story_response_model.dart';
 import 'package:flutter_my_story_app/data/remote/story_service.dart';

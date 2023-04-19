@@ -5,9 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_my_story_app/cubit/add_story/add_story_cubit.dart';
 import 'package:flutter_my_story_app/data/models/story_request_model.dart';
 import 'package:flutter_my_story_app/ui/pages/home_page.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:image_picker/image_picker.dart';
 
 class AddStoryPage extends StatefulWidget {
+  static const routeName = '/add';
   const AddStoryPage({super.key});
 
   @override
@@ -125,9 +128,7 @@ class _AddStoryPageState extends State<AddStoryPage> {
             BlocConsumer<AddStoryCubit, AddStoryState>(
               listener: (context, state) {
                 if (state is AddStoryLoaded) {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const HomePage();
-                  }));
+                  context.push(HomePage.routeName);
                 }
                 if (state is AddStoryError) {
                   ScaffoldMessenger.of(context).showSnackBar(

@@ -9,10 +9,17 @@ import 'package:flutter_my_story_app/cubit/register/register_cubit.dart';
 import 'package:flutter_my_story_app/data/local/auth_preferences.dart';
 import 'package:flutter_my_story_app/data/remote/auth_service.dart';
 import 'package:flutter_my_story_app/data/remote/story_service.dart';
+import 'package:flutter_my_story_app/ui/pages/add_story_page.dart';
+import 'package:flutter_my_story_app/ui/pages/detail_story_page.dart';
+import 'package:flutter_my_story_app/ui/pages/home_page.dart';
 import 'package:flutter_my_story_app/ui/pages/login_page.dart';
+import 'package:flutter_my_story_app/ui/pages/register_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 void main() {
+  setPathUrlStrategy();
   runApp(const MyApp());
 }
 
@@ -63,12 +70,59 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ],
-      child: MaterialApp(
+      child: MaterialApp.router(
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.orange,
         ),
-        home: const LoginPage(),
+        routerConfig: GoRouter(
+          initialLocation: LoginPage.routeName,
+          redirect: (context, GoRouterState state) async {
+            if (state.location == LoginPage.routeName) {
+              final auth = AuthPreference(SharedPreferences.getInstance());
+
+              if (await auth.isUserLogin()) {
+                return HomePage.routeName;
+              } else {
+                return null;
+              }
+            }
+            return null;
+          },
+          routes: [
+            GoRoute(
+              path: LoginPage.routeName,
+              builder: (context, state) => const LoginPage(),
+            ),
+            GoRoute(
+              path: RegisterPage.routeName,
+              builder: (context, state) => const RegisterPage(),
+            ),
+            GoRoute(
+              path: HomePage.routeName,
+              builder: (context, state) => const HomePage(),
+              redirect: (context, state) async {
+                final auth = AuthPreference(SharedPreferences.getInstance());
+
+                if (await auth.isUserLogin() == false) {
+                  return LoginPage.routeName;
+                } else {
+                  return null;
+                }
+              },
+            ),
+            GoRoute(
+              path: '${DetailStoryPage.routeName}/:storyId',
+              builder: (context, state) => DetailStoryPage(
+                storyId: state.params['storyId']!,
+              ),
+            ),
+            GoRoute(
+              path: AddStoryPage.routeName,
+              builder: (context, state) => const AddStoryPage(),
+            ),
+          ],
+        ),
       ),
     );
   }

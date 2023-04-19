@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_my_story_app/ui/pages/detail_story_page.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../data/models/list_story_response_model.dart';
 
@@ -15,11 +16,7 @@ class StoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) {
-          return DetailStoryPage(
-            story: story,
-          );
-        }));
+        context.push('${DetailStoryPage.routeName}/${story.id}');
       },
       child: Card(
         color: Colors.grey.shade300,

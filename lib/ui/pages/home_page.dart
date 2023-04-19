@@ -5,8 +5,10 @@ import 'package:flutter_my_story_app/cubit/logout/logout_cubit.dart';
 import 'package:flutter_my_story_app/ui/pages/add_story_page.dart';
 import 'package:flutter_my_story_app/ui/pages/login_page.dart';
 import 'package:flutter_my_story_app/ui/widgets/story_card.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
+  static const routeName = '/home';
   const HomePage({super.key});
 
   @override
@@ -30,9 +32,7 @@ class _HomePageState extends State<HomePage> {
           BlocConsumer<LogoutCubit, LogoutState>(
             listener: (context, state) {
               if (state is LogoutSuccess) {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const LoginPage();
-                }));
+                context.go(LoginPage.routeName);
               }
             },
             builder: (context, state) {
@@ -85,14 +85,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const AddStoryPage();
-              },
-            ),
-          );
+          context.push(AddStoryPage.routeName);
         },
         child: const Icon(
           Icons.add,

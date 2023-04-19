@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_story_app/cubit/login/login_cubit.dart';
 import 'package:flutter_my_story_app/cubit/register/register_cubit.dart';
-import 'package:flutter_my_story_app/data/models/login_request_model.dart';
 import 'package:flutter_my_story_app/data/models/register_request_model.dart';
-import 'package:flutter_my_story_app/ui/pages/home_page.dart';
 import 'package:flutter_my_story_app/ui/pages/login_page.dart';
-import 'package:flutter_my_story_app/ui/pages/register_page.dart';
+import 'package:go_router/go_router.dart';
 
 class RegisterPage extends StatefulWidget {
+  static const routeName = '/register';
   const RegisterPage({super.key});
 
   @override
@@ -126,10 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             content: Text('Registration Successfully'),
                           ),
                         );
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return const LoginPage();
-                        }));
+                        context.push(LoginPage.routeName);
                       }
                       if (state is RegisterError) {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -173,10 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const LoginPage();
-                            }));
+                            context.push(LoginPage.routeName);
                           },
                           child: const Text(
                             'Login',
