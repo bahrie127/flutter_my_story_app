@@ -9,6 +9,8 @@ import 'package:go_router/go_router.dart';
 
 import 'package:image_picker/image_picker.dart';
 
+import '../../cubit/list_story/list_story_cubit.dart';
+
 class AddStoryPage extends StatefulWidget {
   static const routeName = '/add';
   const AddStoryPage({super.key});
@@ -128,7 +130,8 @@ class _AddStoryPageState extends State<AddStoryPage> {
             BlocConsumer<AddStoryCubit, AddStoryState>(
               listener: (context, state) {
                 if (state is AddStoryLoaded) {
-                  context.push(HomePage.routeName);
+                  context.read<ListStoryCubit>().getAllStory();
+                  context.go(HomePage.routeName);
                 }
                 if (state is AddStoryError) {
                   ScaffoldMessenger.of(context).showSnackBar(

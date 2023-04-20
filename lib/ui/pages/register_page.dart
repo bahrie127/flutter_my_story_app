@@ -124,7 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             content: Text('Registration Successfully'),
                           ),
                         );
-                        context.push(LoginPage.routeName);
+                        context.go(LoginPage.routeName);
                       }
                       if (state is RegisterError) {
                         ScaffoldMessenger.of(context).showSnackBar(

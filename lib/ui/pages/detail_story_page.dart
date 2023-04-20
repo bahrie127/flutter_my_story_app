@@ -59,6 +59,34 @@ class _DetailPageState extends State<DetailStoryPage> {
     return ListView(
       physics: const BouncingScrollPhysics(),
       children: [
+        const SizedBox(
+          height: 20,
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 30,
+          ),
+          child: Row(
+            children: [
+              const Text(
+                'Creator : ',
+                style: TextStyle(
+                  fontSize: 18,
+                ),
+              ),
+              Text(
+                '${story.name}',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 18,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
         SizedBox(
           child: CachedNetworkImage(
             width: double.infinity,
