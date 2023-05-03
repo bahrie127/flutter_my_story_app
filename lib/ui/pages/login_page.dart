@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_my_story_app/cubit/login/login_cubit.dart';
-import 'package:flutter_my_story_app/data/models/login_request_model.dart';
+
 import 'package:flutter_my_story_app/ui/pages/home_page.dart';
 import 'package:flutter_my_story_app/ui/pages/register_page.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../data/models/request/login_request_model.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = '/login';

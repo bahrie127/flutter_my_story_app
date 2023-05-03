@@ -1,8 +1,9 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_story_app/data/models/register_request_model.dart';
 
 import 'package:flutter_my_story_app/data/remote/auth_service.dart';
+
+import '../../data/models/request/register_request_model.dart';
 
 part 'register_state.dart';
 

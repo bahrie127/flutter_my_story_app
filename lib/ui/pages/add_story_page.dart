@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_my_story_app/cubit/add_story/add_story_cubit.dart';
-import 'package:flutter_my_story_app/data/models/story_request_model.dart';
+import 'package:flutter_my_story_app/data/models/request/story_request_model.dart';
 import 'package:flutter_my_story_app/ui/pages/home_page.dart';
 import 'package:go_router/go_router.dart';
 

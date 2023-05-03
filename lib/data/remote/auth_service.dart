@@ -6,9 +6,10 @@ import 'package:flutter_my_story_app/data/models/general_response_model.dart';
 import 'package:flutter_my_story_app/data/models/login_response_model.dart';
 import 'package:http/http.dart' as http;
 
-import '../models/login_request_model.dart';
-import '../models/register_request_model.dart';
+
 import '../models/register_response_model.dart';
+import '../models/request/login_request_model.dart';
+import '../models/request/register_request_model.dart';
 
 class AuthService {
   Future<Either<GeneralResponseModel, RegisterResponseModel>> register(

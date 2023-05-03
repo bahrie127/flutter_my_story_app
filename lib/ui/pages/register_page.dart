@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_my_story_app/cubit/register/register_cubit.dart';
-import 'package:flutter_my_story_app/data/models/register_request_model.dart';
 import 'package:flutter_my_story_app/ui/pages/login_page.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../data/models/request/register_request_model.dart';
 
 class RegisterPage extends StatefulWidget {
   static const routeName = '/register';

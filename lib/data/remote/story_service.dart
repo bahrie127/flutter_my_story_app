@@ -10,7 +10,7 @@ import 'package:flutter_my_story_app/data/local/auth_preferences.dart';
 
 import '../models/list_story_response_model.dart';
 import '../models/story_detail_response_model.dart';
-import '../models/story_request_model.dart';
+import '../models/request/story_request_model.dart';
 
 class StoryService {
   final AuthPreference authPreference;

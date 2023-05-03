@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_my_story_app/data/models/story_request_model.dart';
+import 'package:flutter_my_story_app/data/models/request/story_request_model.dart';
 
 import 'package:flutter_my_story_app/data/remote/story_service.dart';
 
