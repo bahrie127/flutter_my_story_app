@@ -5,6 +5,7 @@ import 'package:flutter_my_story_app/cubit/detail_story/detail_story_cubit.dart'
 import 'package:flutter_my_story_app/cubit/list_story/list_story_cubit.dart';
 import 'package:flutter_my_story_app/cubit/login/login_cubit.dart';
 import 'package:flutter_my_story_app/cubit/logout/logout_cubit.dart';
+import 'package:flutter_my_story_app/cubit/maps/maps_cubit.dart';
 import 'package:flutter_my_story_app/cubit/register/register_cubit.dart';
 import 'package:flutter_my_story_app/data/local/auth_preferences.dart';
 import 'package:flutter_my_story_app/data/remote/auth_service.dart';
@@ -13,10 +14,13 @@ import 'package:flutter_my_story_app/ui/pages/add_story_page.dart';
 import 'package:flutter_my_story_app/ui/pages/detail_story_page.dart';
 import 'package:flutter_my_story_app/ui/pages/home_page.dart';
 import 'package:flutter_my_story_app/ui/pages/login_page.dart';
+import 'package:flutter_my_story_app/ui/pages/map_page.dart';
 import 'package:flutter_my_story_app/ui/pages/register_page.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_strategy/url_strategy.dart';
+
+import 'data/remote/map_service.dart';
 
 void main() {
   setPathUrlStrategy();
@@ -67,6 +71,11 @@ class MyApp extends StatelessWidget {
             StoryService(
               authPreference: AuthPreference(SharedPreferences.getInstance()),
             ),
+          ),
+        ),
+        BlocProvider(
+          create: (context) => MapsCubit(
+            MapService(),
           ),
         ),
       ],
@@ -120,6 +129,13 @@ class MyApp extends StatelessWidget {
             GoRoute(
               path: AddStoryPage.routeName,
               builder: (context, state) => const AddStoryPage(),
+            ),
+            GoRoute(
+              path: '/maps/:lat/:long',
+              builder: (context, state) => MapPage(
+                lat: double.parse(state.params['lat']!),
+                long: double.parse(state.params['long']!),
+              ),
             ),
           ],
         ),

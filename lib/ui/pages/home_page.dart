@@ -16,10 +16,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final controller = ScrollController();
+
   @override
   void initState() {
     context.read<ListStoryCubit>().getAllStory();
     super.initState();
+    controller.addListener(() {
+      if (controller.position.maxScrollExtent == controller.offset) {
+        context.read<ListStoryCubit>().getNextAllStory();
+      }
+    });
   }
 
   @override
@@ -69,10 +76,18 @@ class _HomePageState extends State<HomePage> {
 
               if (state is ListStoryLoaded) {
                 return ListView.builder(
+                  controller: controller,
                   itemBuilder: (context, index) {
+                    if(index == state.stories.length){
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
                     return StoryCard(story: state.stories[index]);
                   },
-                  itemCount: state.stories.length,
+                  itemCount: state.hasMore!
+                      ? state.stories.length + 1
+                      : state.stories.length,
                 );
               }
 

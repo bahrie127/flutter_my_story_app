@@ -20,7 +20,7 @@ LoginResponseModel _$LoginResponseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$LoginResponseModel {
-  String get error => throw _privateConstructorUsedError;
+  bool get error => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   LoginResult get loginResult => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $LoginResponseModelCopyWith<$Res> {
           LoginResponseModel value, $Res Function(LoginResponseModel) then) =
       _$LoginResponseModelCopyWithImpl<$Res, LoginResponseModel>;
   @useResult
-  $Res call({String error, String message, LoginResult loginResult});
+  $Res call({bool error, String message, LoginResult loginResult});
 
   $LoginResultCopyWith<$Res> get loginResult;
 }
@@ -62,7 +62,7 @@ class _$LoginResponseModelCopyWithImpl<$Res, $Val extends LoginResponseModel>
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -91,7 +91,7 @@ abstract class _$$_LoginResponseModelCopyWith<$Res>
       __$$_LoginResponseModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String error, String message, LoginResult loginResult});
+  $Res call({bool error, String message, LoginResult loginResult});
 
   @override
   $LoginResultCopyWith<$Res> get loginResult;
@@ -116,7 +116,7 @@ class __$$_LoginResponseModelCopyWithImpl<$Res>
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -139,7 +139,7 @@ class _$_LoginResponseModel implements _LoginResponseModel {
       _$$_LoginResponseModelFromJson(json);
 
   @override
-  final String error;
+  final bool error;
   @override
   final String message;
   @override
@@ -182,7 +182,7 @@ class _$_LoginResponseModel implements _LoginResponseModel {
 
 abstract class _LoginResponseModel implements LoginResponseModel {
   const factory _LoginResponseModel(
-      {required final String error,
+      {required final bool error,
       required final String message,
       required final LoginResult loginResult}) = _$_LoginResponseModel;
 
@@ -190,7 +190,7 @@ abstract class _LoginResponseModel implements LoginResponseModel {
       _$_LoginResponseModel.fromJson;
 
   @override
-  String get error;
+  bool get error;
   @override
   String get message;
   @override

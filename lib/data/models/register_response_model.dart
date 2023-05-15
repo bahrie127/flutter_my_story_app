@@ -4,9 +4,9 @@ part 'register_response_model.freezed.dart';
 part 'register_response_model.g.dart';
 
 @freezed
-class RegisterResponseModel with _$RegisterResponseModel{
+class RegisterResponseModel with _$RegisterResponseModel {
   const factory RegisterResponseModel({
-    required String error,
+    required bool error,
     required String message,
   }) = _RegisterResponseModel;
 

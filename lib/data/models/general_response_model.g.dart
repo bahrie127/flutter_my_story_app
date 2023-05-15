@@ -9,7 +9,7 @@ part of 'general_response_model.dart';
 _$_GeneralResponseModel _$$_GeneralResponseModelFromJson(
         Map<String, dynamic> json) =>
     _$_GeneralResponseModel(
-      error: json['error'] as String,
+      error: json['error'] as bool,
       message: json['message'] as String,
     );
 

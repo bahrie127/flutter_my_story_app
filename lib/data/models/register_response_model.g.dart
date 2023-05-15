@@ -9,7 +9,7 @@ part of 'register_response_model.dart';
 _$_RegisterResponseModel _$$_RegisterResponseModelFromJson(
         Map<String, dynamic> json) =>
     _$_RegisterResponseModel(
-      error: json['error'] as String,
+      error: json['error'] as bool,
       message: json['message'] as String,
     );
 

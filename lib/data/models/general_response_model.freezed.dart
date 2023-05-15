@@ -20,7 +20,7 @@ GeneralResponseModel _$GeneralResponseModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$GeneralResponseModel {
-  String get error => throw _privateConstructorUsedError;
+  bool get error => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -35,7 +35,7 @@ abstract class $GeneralResponseModelCopyWith<$Res> {
           $Res Function(GeneralResponseModel) then) =
       _$GeneralResponseModelCopyWithImpl<$Res, GeneralResponseModel>;
   @useResult
-  $Res call({String error, String message});
+  $Res call({bool error, String message});
 }
 
 /// @nodoc
@@ -59,7 +59,7 @@ class _$GeneralResponseModelCopyWithImpl<$Res,
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,7 @@ abstract class _$$_GeneralResponseModelCopyWith<$Res>
       __$$_GeneralResponseModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String error, String message});
+  $Res call({bool error, String message});
 }
 
 /// @nodoc
@@ -97,7 +97,7 @@ class __$$_GeneralResponseModelCopyWithImpl<$Res>
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -115,7 +115,7 @@ class _$_GeneralResponseModel implements _GeneralResponseModel {
       _$$_GeneralResponseModelFromJson(json);
 
   @override
-  final String error;
+  final bool error;
   @override
   final String message;
 
@@ -154,14 +154,14 @@ class _$_GeneralResponseModel implements _GeneralResponseModel {
 
 abstract class _GeneralResponseModel implements GeneralResponseModel {
   const factory _GeneralResponseModel(
-      {required final String error,
+      {required final bool error,
       required final String message}) = _$_GeneralResponseModel;
 
   factory _GeneralResponseModel.fromJson(Map<String, dynamic> json) =
       _$_GeneralResponseModel.fromJson;
 
   @override
-  String get error;
+  bool get error;
   @override
   String get message;
   @override

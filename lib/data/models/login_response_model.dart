@@ -6,7 +6,7 @@ part 'login_response_model.g.dart';
 @freezed
 class LoginResponseModel with _$LoginResponseModel {
   const factory LoginResponseModel({
-    required String error,
+    required bool error,
     required String message,
     required LoginResult loginResult,
   }) = _LoginResponseModel;

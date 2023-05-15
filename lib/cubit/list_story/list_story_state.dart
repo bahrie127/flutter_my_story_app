@@ -13,8 +13,14 @@ class ListStoryLoading extends ListStoryState {}
 
 class ListStoryLoaded extends ListStoryState {
   final List<Story> stories;
+  final int? page;
+  final int? size;
+  final bool? hasMore;
   const ListStoryLoaded({
     required this.stories,
+    this.page = 0,
+    this.size = 10,
+    this.hasMore = true,
   });
 
   @override

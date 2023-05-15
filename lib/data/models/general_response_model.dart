@@ -6,7 +6,7 @@ part 'general_response_model.g.dart';
 @freezed
 class GeneralResponseModel with _$GeneralResponseModel {
   const factory GeneralResponseModel({
-    required String error,
+    required bool error,
     required String message,
   }) = _GeneralResponseModel;
 

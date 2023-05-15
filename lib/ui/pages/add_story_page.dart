@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_my_story_app/cubit/add_story/add_story_cubit.dart';
+import 'package:flutter_my_story_app/cubit/maps/maps_cubit.dart';
+import 'package:flutter_my_story_app/data/models/maps/map_model.dart';
 import 'package:flutter_my_story_app/data/models/request/story_request_model.dart';
 import 'package:flutter_my_story_app/ui/pages/home_page.dart';
 import 'package:go_router/go_router.dart';
@@ -21,6 +23,8 @@ class AddStoryPage extends StatefulWidget {
 
 class _AddStoryPageState extends State<AddStoryPage> {
   TextEditingController? _descController;
+  TextEditingController? _addressController;
+  MapModel? mapModel;
   XFile? _imageFile;
 
   Future<void> getImage(ImageSource source) async {
@@ -39,6 +43,8 @@ class _AddStoryPageState extends State<AddStoryPage> {
   @override
   void initState() {
     _descController = TextEditingController();
+    _addressController = TextEditingController();
+    context.read<MapsCubit>().getCurrentPosition();
     super.initState();
   }
 
@@ -123,8 +129,75 @@ class _AddStoryPageState extends State<AddStoryPage> {
                 border: OutlineInputBorder(),
                 hintText: "Description",
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 40.0, horizontal: 20),
+                    EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
               ),
+            ),
+            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Address",
+                style: Theme.of(context)
+                    .textTheme
+                    .labelLarge!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            BlocConsumer<MapsCubit, MapsState>(
+              listener: (context, state) {
+                state.maybeMap(
+                    orElse: () =>
+                        _addressController!.text = 'Location Not Found',
+                    loaded: (data) {
+                      mapModel = data.data;
+                      _addressController!.text =
+                          data.data.address ?? 'Location Not Found';
+                    });
+              },
+              builder: (context, state) {
+                state.maybeMap(
+                  orElse: () {},
+                  loading: (data) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                );
+                return Row(
+                  children: [
+                    Expanded(
+                      flex: 5,
+                      child: TextField(
+                        controller: _addressController,
+                        maxLines: 2,
+                        enabled: false,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: "Address",
+                          contentPadding: EdgeInsets.symmetric(
+                              vertical: 8.0, horizontal: 16),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    Expanded(
+                      flex: 2,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          await context.push(
+                            '/maps/${mapModel!.latLng!.latitude}/${mapModel!.latLng!.longitude}',
+                          );
+                          setState(() {});
+                        },
+                        child: const FittedBox(child: Text('Change\nLocation')),
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
             const SizedBox(height: 20),
             BlocConsumer<AddStoryCubit, AddStoryState>(
@@ -150,11 +223,14 @@ class _AddStoryPageState extends State<AddStoryPage> {
                 }
                 return ElevatedButton(
                   onPressed: () {
-                    if (_imageFile == null || _descController!.text.isEmpty) {
+                    if (_imageFile == null ||
+                        _descController!.text.isEmpty ||
+                        mapModel == null) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           backgroundColor: Colors.red,
-                          content: Text('Image and description is mandatory'),
+                          content: Text(
+                              'Image, description and address is mandatory'),
                         ),
                       );
                     } else {
@@ -162,6 +238,8 @@ class _AddStoryPageState extends State<AddStoryPage> {
                             StoryRequestModel(
                               description: _descController!.text,
                               image: _imageFile!,
+                              lat: mapModel!.latLng!.latitude,
+                              long: mapModel!.latLng!.longitude,
                             ),
                           );
                     }

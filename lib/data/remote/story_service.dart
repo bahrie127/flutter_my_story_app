@@ -18,11 +18,13 @@ class StoryService {
     required this.authPreference,
   });
 
-  Future<Either<GeneralResponseModel, ListStoryResponseModel>>
-      getAllStory() async {
+  Future<Either<GeneralResponseModel, ListStoryResponseModel>> getAllStory(
+    int page,
+    int size,
+  ) async {
     final token = (await authPreference.getAuthData())!.token;
     final response = await http.get(
-      Uri.parse("${Constants.baseUrl}/stories"),
+      Uri.parse("${Constants.baseUrl}/stories?page=$page&size=$size"),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'Authorization': 'Bearer $token',
@@ -74,16 +76,14 @@ class StoryService {
     final bytes = await storyData.image.readAsBytes();
 
     final multiPartFile =
-        http.MultipartFile.fromBytes("photo", bytes, filename: fileName);
+        http.MultipartFile.fromBytes('photo', bytes, filename: fileName);
 
     final Map<String, String> headers = {
       'Content-Type': 'application/json; charset=UTF-8',
       'Authorization': 'Bearer $token',
     };
 
-    final Map<String, String> fields = {
-      "description": storyData.description,
-    };
+    final Map<String, String> fields = storyData.toJson();
 
     request.files.add(multiPartFile);
     request.fields.addAll(fields);

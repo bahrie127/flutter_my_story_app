@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_my_story_app/cubit/detail_story/detail_story_cubit.dart';
+import 'package:flutter_my_story_app/cubit/maps/maps_cubit.dart';
+import 'package:flutter_my_story_app/data/models/maps/map_model.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import '../../data/models/list_story_response_model.dart';
 
@@ -26,6 +29,21 @@ class _DetailPageState extends State<DetailStoryPage> {
     super.initState();
   }
 
+  final Set<Marker> markers = {};
+
+  void _createMarker(MapModel model) {
+    if (model.latLng != null) {
+      final marker = Marker(
+        markerId: const MarkerId("curr_position"),
+        infoWindow: InfoWindow(title: model.address),
+        position: LatLng(model.latLng!.latitude, model.latLng!.longitude),
+      );
+
+      markers.add(marker);
+      // setState(() {});
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +61,14 @@ class _DetailPageState extends State<DetailStoryPage> {
               );
             }
             if (state is DetailStoryLoaded) {
+              if (state.story.lat != null && state.story.lon != null) {
+                context
+                    .read<MapsCubit>()
+                    .getSelectedPosition(state.story.lat!, state.story.lon!);
+              } else {
+                context.read<MapsCubit>().setInitial();
+              }
+
               return SafeArea(
                 child: details(state.story),
               );
@@ -62,9 +88,9 @@ class _DetailPageState extends State<DetailStoryPage> {
         const SizedBox(
           height: 20,
         ),
-        Container(
+        Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 30,
+            horizontal: 16,
           ),
           child: Row(
             children: [
@@ -96,26 +122,26 @@ class _DetailPageState extends State<DetailStoryPage> {
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 16,
         ),
         Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: 30,
+            horizontal: 16,
           ),
           child: const Text(
             'Description',
             style: TextStyle(
               fontWeight: FontWeight.w400,
-              fontSize: 22,
+              fontSize: 18,
             ),
           ),
         ),
         const SizedBox(
           height: 10,
         ),
-        Container(
+        Padding(
           padding: const EdgeInsets.symmetric(
-            horizontal: 30,
+            horizontal: 16,
           ),
           child: Text(
             story.description!,
@@ -126,8 +152,72 @@ class _DetailPageState extends State<DetailStoryPage> {
           ),
         ),
         const SizedBox(
-          height: 30,
+          height: 16,
         ),
+        const Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 16,
+          ),
+          child: Text(
+            'Address',
+            style: TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 18,
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        BlocBuilder<MapsCubit, MapsState>(
+          builder: (context, state) {
+            return state.maybeMap(
+              orElse: () => const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Text('No Address'),
+              ),
+              loading: (value) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              loaded: (data) {
+                _createMarker(data.data);
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Expanded(
+                    child: Column(
+                      children: [
+                        Text(
+                          data.data.address!,
+                          textAlign: TextAlign.justify,
+                          style: const TextStyle(
+                            letterSpacing: 1,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        SizedBox(
+                          height: 200,
+                          child: GoogleMap(
+                            mapType: MapType.normal,
+                            markers: markers,
+                            initialCameraPosition: CameraPosition(
+                              target: LatLng(
+                                data.data.latLng!.latitude,
+                                data.data.latLng!.longitude,
+                              ),
+                              zoom: 15,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        )
       ],
     );
   }

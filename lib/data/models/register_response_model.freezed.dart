@@ -21,7 +21,7 @@ RegisterResponseModel _$RegisterResponseModelFromJson(
 
 /// @nodoc
 mixin _$RegisterResponseModel {
-  String get error => throw _privateConstructorUsedError;
+  bool get error => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ abstract class $RegisterResponseModelCopyWith<$Res> {
           $Res Function(RegisterResponseModel) then) =
       _$RegisterResponseModelCopyWithImpl<$Res, RegisterResponseModel>;
   @useResult
-  $Res call({String error, String message});
+  $Res call({bool error, String message});
 }
 
 /// @nodoc
@@ -60,7 +60,7 @@ class _$RegisterResponseModelCopyWithImpl<$Res,
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -77,7 +77,7 @@ abstract class _$$_RegisterResponseModelCopyWith<$Res>
       __$$_RegisterResponseModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String error, String message});
+  $Res call({bool error, String message});
 }
 
 /// @nodoc
@@ -98,7 +98,7 @@ class __$$_RegisterResponseModelCopyWithImpl<$Res>
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String,
+              as bool,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -116,7 +116,7 @@ class _$_RegisterResponseModel implements _RegisterResponseModel {
       _$$_RegisterResponseModelFromJson(json);
 
   @override
-  final String error;
+  final bool error;
   @override
   final String message;
 
@@ -155,14 +155,14 @@ class _$_RegisterResponseModel implements _RegisterResponseModel {
 
 abstract class _RegisterResponseModel implements RegisterResponseModel {
   const factory _RegisterResponseModel(
-      {required final String error,
+      {required final bool error,
       required final String message}) = _$_RegisterResponseModel;
 
   factory _RegisterResponseModel.fromJson(Map<String, dynamic> json) =
       _$_RegisterResponseModel.fromJson;
 
   @override
-  String get error;
+  bool get error;
   @override
   String get message;
   @override
