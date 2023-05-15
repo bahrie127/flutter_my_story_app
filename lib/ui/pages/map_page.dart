@@ -24,7 +24,6 @@ class _MapPageState extends State<MapPage> {
   final TextEditingController _addressController = TextEditingController();
   late GoogleMapController _mapController;
   final Set<Marker> _markers = {};
-  LatLng? _currLatLon;
 
   void _createInitialMarker() {
     final marker = Marker(
@@ -77,7 +76,6 @@ class _MapPageState extends State<MapPage> {
       _addressController.text = "Location not found ";
     }
 
-    _currLatLon = LatLng(lat, long);
     if (mounted) {
       context.read<MapsCubit>().setValue(MapModel(
             address: _addressController.text,

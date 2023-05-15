@@ -43,12 +43,12 @@ class _RegisterPageState extends State<RegisterPage> {
         child: Center(
           child: ListView(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 100),
+              const Padding(
+                padding: EdgeInsets.only(top: 100),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
+                  children: [
                     Text(
                       "Join to Story App",
                       style: TextStyle(

@@ -38,138 +38,137 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: Center(
-            child: ListView(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 100),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        "Welcome to Story App",
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 40),
-                Padding(
-                  padding: const EdgeInsets.all(32),
-                  child: Column(
-                    children: [
-                      const Text(
-                        "Login",
-                        style: TextStyle(
-                          fontSize: 18,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      TextField(
-                        controller: _emailController,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          hintText: "Email",
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      TextField(
-                        controller: _passwordController,
-                        obscureText: isHide,
-                        decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          hintText: "Password",
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              isHide
-                                  ? Icons.remove_red_eye
-                                  : Icons.remove_red_eye_outlined,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                isHide = !isHide;
-                              });
-                            },
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Column(
+      body: SafeArea(
+        child: Center(
+          child: ListView(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 100),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    BlocConsumer<LoginCubit, LoginState>(
-                      listener: (context, state) {
-                        if (state is LoginLoaded) {
-                          context.go(HomePage.routeName);
-                        }
-                        if (state is LoginError) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text(state.message),
-                            ),
-                          );
-                        }
-                      },
-                      builder: (context, state) {
-                        if (state is LoginLoading) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                        return ElevatedButton(
-                          onPressed: () {
-                            context.read<LoginCubit>().loginUser(
-                                  LoginRequestModel(
-                                    email: _emailController!.text,
-                                    password: _passwordController!.text,
-                                  ),
-                                );
-                          },
-                          child: const Padding(
-                            padding: EdgeInsets.all(18.0),
-                            child: Text("SIGN IN"),
-                          ),
-                        );
-                      },
-                    ),
-                    Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text('Don\'t have an account yet ?'),
-                          const SizedBox(
-                            width: 2,
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              context.push(RegisterPage.routeName);
-                            },
-                            child: const Text(
-                              'Register',
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                              ),
-                            ),
-                          ),
-                        ],
+                    Text(
+                      "Welcome to Story App",
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ],
-                )
-              ],
-            ),
+                ),
+              ),
+              const SizedBox(height: 40),
+              Padding(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                  children: [
+                    const Text(
+                      "Login",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      controller: _emailController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "Email",
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    TextField(
+                      controller: _passwordController,
+                      obscureText: isHide,
+                      decoration: InputDecoration(
+                        border: const OutlineInputBorder(),
+                        hintText: "Password",
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            isHide
+                                ? Icons.remove_red_eye
+                                : Icons.remove_red_eye_outlined,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              isHide = !isHide;
+                            });
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  BlocConsumer<LoginCubit, LoginState>(
+                    listener: (context, state) {
+                      if (state is LoginLoaded) {
+                        context.go(HomePage.routeName);
+                      }
+                      if (state is LoginError) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: Colors.red,
+                            content: Text(state.message),
+                          ),
+                        );
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is LoginLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return ElevatedButton(
+                        onPressed: () {
+                          context.read<LoginCubit>().loginUser(
+                                LoginRequestModel(
+                                  email: _emailController!.text,
+                                  password: _passwordController!.text,
+                                ),
+                              );
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(18.0),
+                          child: Text("SIGN IN"),
+                        ),
+                      );
+                    },
+                  ),
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Don\'t have an account yet ?'),
+                        const SizedBox(
+                          width: 2,
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            context.push(RegisterPage.routeName);
+                          },
+                          child: const Text(
+                            'Register',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
-      
+      ),
     );
   }
 }

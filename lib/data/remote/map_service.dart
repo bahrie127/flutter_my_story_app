@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_my_story_app/data/models/maps/map_model.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -65,14 +66,14 @@ class MapService {
       ));
     } on PlatformException catch (e) {
       if (e.code == 'IO_ERROR') {
-        print(
+        debugPrint(
             'A network error occurred trying to lookup the supplied coordinates: ${e.message}');
       } else {
-        print('Failed to lookup coordinates: ${e.message}');
+        debugPrint('Failed to lookup coordinates: ${e.message}');
       }
       return Left(e.message!);
     } catch (e) {
-      print('An unknown error occurred: $e');
+      debugPrint('An unknown error occurred: $e');
       return Left(e.toString());
     }
   }
