@@ -18,10 +18,12 @@ class ListStoryCubit extends Cubit<ListStoryState> {
     result.fold(
       (l) => emit(ListStoryError(message: l.message)),
       (r) => emit(ListStoryLoaded(
-          stories: r.listStory!,
+          stories: r.listStory!
+              .where((element) => element.name == 'Admin 2 ')
+              .toList(),
           page: 1,
           size: 10,
-          hasMore: r.listStory!.length >= 10)),
+          hasMore: false)),
     );
   }
 

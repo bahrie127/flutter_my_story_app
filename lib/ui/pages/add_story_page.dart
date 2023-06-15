@@ -51,11 +51,23 @@ class _AddStoryPageState extends State<AddStoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Story')),
+      appBar: AppBar(title: const Text('Add Restaurant')),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: ListView(
           children: [
+            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                "Foto Restaurant",
+                style: Theme.of(context)
+                    .textTheme
+                    .labelLarge!
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(height: 10),
             ClipRRect(
               borderRadius: BorderRadius.circular(16.0),
               child: _imageFile != null
@@ -111,7 +123,7 @@ class _AddStoryPageState extends State<AddStoryPage> {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                "Description",
+                "Name",
                 style: Theme.of(context)
                     .textTheme
                     .labelLarge!
@@ -124,12 +136,12 @@ class _AddStoryPageState extends State<AddStoryPage> {
             TextField(
               controller: _descController,
               keyboardType: TextInputType.multiline,
-              maxLines: 5,
+              maxLines: 1,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
-                hintText: "Description",
+                hintText: "Name",
                 contentPadding:
-                    EdgeInsets.symmetric(vertical: 20.0, horizontal: 20),
+                    EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
               ),
             ),
             const SizedBox(height: 20),
@@ -245,9 +257,10 @@ class _AddStoryPageState extends State<AddStoryPage> {
                     }
                   },
                   child: const Padding(
-                    padding: EdgeInsets.all(18.0),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 18.0, vertical: 12),
                     child: Text(
-                      "Upload",
+                      "Submit",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,

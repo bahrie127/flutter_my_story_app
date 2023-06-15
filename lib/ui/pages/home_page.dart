@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Story App'),
+        title: const Text('List Restaurant'),
         actions: [
           BlocConsumer<LogoutCubit, LogoutState>(
             listener: (context, state) {
@@ -78,11 +78,11 @@ class _HomePageState extends State<HomePage> {
                 return ListView.builder(
                   controller: controller,
                   itemBuilder: (context, index) {
-                    if(index == state.stories.length){
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
+                    // if(index == state.stories.length){
+                    //   return const Center(
+                    //     child: CircularProgressIndicator(),
+                    //   );
+                    // }
                     return StoryCard(story: state.stories[index]);
                   },
                   itemCount: state.hasMore!

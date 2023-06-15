@@ -47,7 +47,7 @@ class _DetailPageState extends State<DetailStoryPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Detail Story')),
+        appBar: AppBar(title: const Text('Detail Restaurant')),
         body: BlocBuilder<DetailStoryCubit, DetailStoryState>(
           builder: (context, state) {
             if (state is DetailStoryLoading) {
@@ -85,34 +85,6 @@ class _DetailPageState extends State<DetailStoryPage> {
     return ListView(
       physics: const BouncingScrollPhysics(),
       children: [
-        const SizedBox(
-          height: 20,
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 16,
-          ),
-          child: Row(
-            children: [
-              const Text(
-                'Creator : ',
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-              Text(
-                '${story.name}',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 18,
-                ),
-              ),
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 16,
-        ),
         SizedBox(
           child: CachedNetworkImage(
             width: double.infinity,
@@ -129,7 +101,7 @@ class _DetailPageState extends State<DetailStoryPage> {
             horizontal: 16,
           ),
           child: const Text(
-            'Description',
+            'Name',
             style: TextStyle(
               fontWeight: FontWeight.w400,
               fontSize: 18,
@@ -146,9 +118,8 @@ class _DetailPageState extends State<DetailStoryPage> {
           child: Text(
             story.description!,
             textAlign: TextAlign.justify,
-            style: const TextStyle(
-              letterSpacing: 1,
-            ),
+            style: TextStyle(
+                letterSpacing: 1, fontSize: 22, fontWeight: FontWeight.w600),
           ),
         ),
         const SizedBox(

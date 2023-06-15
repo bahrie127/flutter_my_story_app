@@ -133,7 +133,7 @@ class _MapPageState extends State<MapPage> {
             },
             icon: const Icon(
               Icons.check_box_outlined,
-              color: Colors.green,
+              color: Colors.black,
               size: 32,
             ),
           ),
